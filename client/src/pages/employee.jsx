@@ -1,14 +1,14 @@
-import Nav from "../../components/nav";
+import Nav from "../components/nav";
 
-function Device() {
+function Employee() {
     return (
         <div className="d-flex flex-row" style={{backgroundColor: "#F1F8FF"}}>
             <Nav></Nav>
             <div className="col-10">
-                <p>Device</p>
+                <p>Employee</p>
             </div>
         </div>
     )
 }
 
-export default Device;
+export default Employee;
