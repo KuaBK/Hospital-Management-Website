@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom/client'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Patient from "./pages/patient";
-import Home from "./pages/home";
-import Employee from "./pages/employee";
-import Medicine from "./pages/medicine";
-import Device from "./pages/device";
+import Patient from "./views/patient";
+import Home from "./views/home";
+import Employee from "./views/employee";
+import Medicine from "./views/medicine";
+import Device from "./views/device";
 
-function Root() {
+function Navigation() {
   return (
       <BrowserRouter>
           <Routes>
@@ -24,7 +24,7 @@ function Root() {
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Root />
-  </React.StrictMode>,
+  // <React.StrictMode>
+    <Navigation />
+  // </React.StrictMode>
 )
