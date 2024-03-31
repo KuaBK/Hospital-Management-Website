@@ -6,7 +6,7 @@ import { FiPlus } from "react-icons/fi";
 import Search from "./search";
 import InputForm from "./inputForm";
 import DeleteForm from "./deleteForm";
-import { fetchApi } from "../../../hooks/fetchApi";
+import { fetchApi } from "./fetchApi";
 
 function ListPatient() {
     const inputRef = useRef();

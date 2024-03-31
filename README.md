@@ -9,5 +9,5 @@ npm run dev
 ### Server
 ```bash
 cd server
-nodejs ./src/index.js
+node ./src/index.js
 ```

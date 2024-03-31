@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import Toast from "react-bootstrap/Toast";
 import ToastContainer from "react-bootstrap/ToastContainer"
 
-import { fetchApi } from "../../../hooks/fetchApi";
+import { fetchApi } from "./fetchApi";
 
 function DeleteForm({showDelete, setShowDelete, deleteID, setDeleteID, searchValue, setLoading, setSearchResult}) {
     const [showSuccess, setShowSuccess] = useState(false);

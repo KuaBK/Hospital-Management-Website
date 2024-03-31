@@ -7,14 +7,54 @@ import { FaSuitcaseMedical } from "react-icons/fa6";
 
 import logo from "../assets/hcmut.png";
 
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"
+import axios from "axios";
+import Cookies from "js-cookie";
+
 function Nav() {
+    const navigate = useNavigate();
+    const tokenUser = Cookies.get("tokenUser");
+    const [userData, setUserData] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const handleUser = async () => {
+        await axios.get("http://localhost:3000/user", {
+          params: {
+            tokenUser: tokenUser
+          }
+        }).then(res => {
+            setUserData(res.data);
+        });
+        if (userData != []) setLoading(false);
+    }
+
+    const handleSignOut = async () => {
+        await axios.get("http://localhost:3000/user/signout", {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            withCredentials: true
+        }).then((res) => {
+            if (res.data == "Success") {
+                navigate("/user/signin")
+            }
+        });
+    }
+
+    useEffect(
+        () => {
+            handleUser();
+        }, [loading]
+    )
+
     return (
-        <div className="col d-flex flex-column justify-content-between" style={{backgroundColor: "white", height: "100vh"}}>
-            <div className="d-flex flex-row justify-content-between align-items-center px-2 pt-5">
+        <div className="col d-flex flex-column justify-content-start" style={{backgroundColor: "white", height: "100vh"}}>
+            <div className="d-flex flex-row justify-content-between align-items-center px-2 pt-5" style={{marginBottom: "auto"}}>
                 <img src={logo} className="" style={{width: "50px"}}></img>
                 <h5 className="mb-0" style={{color: "#3497F9"}}>HCMUT Hospital</h5>
             </div>
-            <div id="sidebar" className="d-flex flex-column justify-content-center align-items-center">
+            <div id="sidebar" className="d-flex flex-column justify-content-center align-items-center" style={{marginBottom: "auto"}}>
                 <NavLink
                     to="/"
                     style={({ isActive }) => {
@@ -126,11 +166,11 @@ function Nav() {
                     <p className="text-center p-3 my-2">Trang thiết bị</p>
                 </NavLink>
             </div>
-            <Link to="/signin">
-                <div className="d-flex flex-column justify-content-center align-items-center p-3 border border-1">
-                    <p className="mb-0">Đăng nhập/Đăng ký</p>
-                </div>
-            </Link>
+            <div className="">
+                <button className="border-0" style={{height: "10vh", width: "100%", backgroundColor: "white"}} onClick={handleSignOut}>
+                    <p className="mb-0 fw-bolder" style={{color: "#3397F9"}}>Đăng xuất</p>
+                </button>
+            </div>
         </div>
     )
 }

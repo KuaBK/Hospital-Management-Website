@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 import Toast from "react-bootstrap/Toast";
 import ToastContainer from "react-bootstrap/ToastContainer";
 
-import { fetchApi } from "../../../hooks/fetchApi";
+import { fetchApi } from "./fetchApi";
 
 function InputForm({showAdd, setShowAdd, searchValue, setLoading, setSearchResult}) {
     const [notification, setNotification] = useState("");
@@ -53,7 +53,6 @@ function InputForm({showAdd, setShowAdd, searchValue, setLoading, setSearchResul
         if (!address.startsWith(' ')) {
             setAddress(address);
         }
-        
     }
 
     const handlePhoneNumber = (e) => {
@@ -104,13 +103,13 @@ function InputForm({showAdd, setShowAdd, searchValue, setLoading, setSearchResul
                                 <Form.Control type="text" placeholder="Họ tên" value={name} onChange={handleName}/>
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row} className="mb-3" controlId="nameForm">
+                        <Form.Group as={Row} className="mb-3" controlId="ageForm">
                             <Form.Label column sm="2">Tuổi</Form.Label>
                             <Col sm="3">
                                 <Form.Control value={age} onChange={handleAge} type="number" placeholder="Tuổi" />
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row} className="mb-3" controlId="nameForm">
+                        <Form.Group as={Row} className="mb-3" controlId="genderForm">
                             <Form.Label column sm="2">Giới tính</Form.Label>
                             <Col sm="5">
                                 <Form.Select value={gender}  onChange={e => handleGender(e)}>
@@ -120,13 +119,13 @@ function InputForm({showAdd, setShowAdd, searchValue, setLoading, setSearchResul
                                 </Form.Select>
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row} className="mb-3" controlId="nameForm">
+                        <Form.Group as={Row} className="mb-3" controlId="addressForm">
                             <Form.Label column sm="2">Địa chỉ</Form.Label>
                             <Col sm="10">
                                 <Form.Control value={address} onChange={handleAddress} type="text" placeholder="Địa chỉ" />
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row} className="mb-3" controlId="nameForm">
+                        <Form.Group as={Row} className="mb-3" controlId="phoneNumberForm">
                             <Form.Label column sm="2">Số điện thoại</Form.Label>
                             <Col sm="5">
                                 <Form.Control value={phoneNumber} onChange={handlePhoneNumber} type="tel" placeholder="Số điện thoại" />

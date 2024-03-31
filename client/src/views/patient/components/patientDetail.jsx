@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Outlet } from "react-router-dom";
 
-import { getPatientProfile } from "../../../hooks/getPatientProfile";
+import { getPatientProfile } from "./getPatientProfile";
 
 function PatientDetail() {
     const {patientID} = useParams();
