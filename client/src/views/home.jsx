@@ -18,7 +18,7 @@ function Home() {
   return (
     <div className="d-flex flex-row" style={{backgroundColor: "#F1F8FF"}}>
       <Nav></Nav>
-      <div className="col-10">
+      <div className="" style={{width: "80%"}}>
         <p>Home</p>
       </div>
     </div>

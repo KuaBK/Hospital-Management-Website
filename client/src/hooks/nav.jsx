@@ -4,6 +4,7 @@ import { HiOutlineUserGroup } from "react-icons/hi";
 import { FaUserDoctor } from "react-icons/fa6";
 import { GiMedicines } from "react-icons/gi";
 import { FaSuitcaseMedical } from "react-icons/fa6";
+import { RiProfileLine } from "react-icons/ri";
 
 import logo from "../assets/hcmut.png";
 
@@ -37,7 +38,7 @@ function Nav() {
             withCredentials: true
         }).then((res) => {
             if (res.data == "Success") {
-                navigate("/user/signin")
+                return navigate("/user/signin")
             }
         });
     }
@@ -49,10 +50,10 @@ function Nav() {
     )
 
     return (
-        <div className="col d-flex flex-column justify-content-start" style={{backgroundColor: "white", height: "100vh"}}>
-            <div className="d-flex flex-row justify-content-between align-items-center px-2 pt-5" style={{marginBottom: "auto"}}>
-                <img src={logo} className="" style={{width: "50px"}}></img>
-                <h5 className="mb-0" style={{color: "#3497F9"}}>HCMUT Hospital</h5>
+        <div className="d-flex flex-column justify-content-start" style={{backgroundColor: "white", height: "100vh", width: "20%"}}>
+            <div className="d-flex flex-row justify-content-center align-items-center px-2 pt-5" style={{marginBottom: "auto"}}>
+                <img src={logo} className="me-2" style={{width: "50px"}}></img>
+                <h5 className="mb-0 ms-2" style={{color: "#3497F9"}}>HCMUT Hospital</h5>
             </div>
             <div id="sidebar" className="d-flex flex-column justify-content-center align-items-center" style={{marginBottom: "auto"}}>
                 <NavLink
@@ -164,6 +165,28 @@ function Nav() {
                 >
                     <FaSuitcaseMedical size={30} className="ms-4"></FaSuitcaseMedical>
                     <p className="text-center p-3 my-2">Trang thiết bị</p>
+                </NavLink>
+                <NavLink 
+                    to="/user"
+                    style={({ isActive }) => {
+                        return {
+                            textDecoration: "none", 
+                            width: "100%",
+                            backgroundColor: isActive? "#E7F3FE": "white",
+                            color: isActive? "#3397F9": "#7F8E98",
+                            borderLeftStyle: isActive? "solid": "none",
+                            borderLeftWidth: isActive? "5px": "0px",
+                        };
+                    }}
+                    className={({ isActive }) =>
+                        [
+                        isActive ? "fw-bolder" : "",
+                        "d-flex flex-row justify-content-start align-items-center",
+                        ].join(" ")
+                    }
+                >
+                    <RiProfileLine size={30} className="ms-4"></RiProfileLine>
+                    <p className="text-center p-3 my-2">Thông tin cá nhân</p>
                 </NavLink>
             </div>
             <div className="">

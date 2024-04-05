@@ -6,13 +6,15 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./views/home";
 import SignUp from "./views/login/signUp";
 import Patient from "./views/patient/patient";
-import PatientDetail from "./views/patient/components/patientDetail";
-import Profile from "./views/patient/components/profile";
-import ListPatient from "./views/patient/components/listPatient";
-import UpdateProfile from "./views/patient/components/updateProfile";
-import Employee from "./views/employee";
-import Medicine from "./views/medicine";
+import PatientDetail from "./views/patient/patientProfile/patientDetail";
+import PatientTabs from "./views/patient/patientProfile/patientTabs";
+import ListPatient from "./views/patient/listPatient/listPatient";
+import Employee from "./views/employee/employee";
+import ListEmployee from "./views/employee/components/listEmployee";
+import Medicine from "./views/medicine/medicine";
+import ListMedicine from "./views/medicine/components/listMedicine";
 import Device from "./views/device";
+import User from "./views/user"
 import SignIn from "./views/login/signIn";
 
 
@@ -20,18 +22,22 @@ function Navigation() {
   return (
       <BrowserRouter>
         <Routes>
+          <Route path="/user" Component={User}></Route>
           <Route path="/user/signup" Component={SignUp}></Route>
           <Route path="/user/signin" Component={SignIn}></Route>
           <Route path="/" Component={Home}></Route>
           <Route path="/patient" Component={Patient}>
             <Route path="" Component={ListPatient}></Route>
             <Route path=":patientID" Component={PatientDetail}>
-              <Route path="" Component={Profile}></Route>
-              <Route path="update" Component={UpdateProfile}></Route>
+              <Route path="" Component={PatientTabs}></Route>
             </Route>
           </Route>
-          <Route path="/employee" Component={Employee}></Route>
-          <Route path="/medicine" Component={Medicine}></Route>
+          <Route path="/employee" Component={Employee}>
+            <Route path="" Component={ListEmployee}></Route>
+          </Route>
+          <Route path="/medicine" Component={Medicine}>
+            <Route path="" Component={ListMedicine}></Route>
+          </Route>
           <Route path="/device" Component={Device}></Route>
         </Routes>
       </BrowserRouter>
