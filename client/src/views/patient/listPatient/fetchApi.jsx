@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from "axios";
 
 export const fetchApi = async (searchValue, setLoading, setSearchResult) => {
     setLoading(true);
@@ -7,7 +7,9 @@ export const fetchApi = async (searchValue, setLoading, setSearchResult) => {
         params: {
             keyword: searchValue,
         }
-    }).then(result => setSearchResult(result.data));
+    }).then(result => {
+        setSearchResult(result.data);
+    });
 
     setLoading(false);
 };

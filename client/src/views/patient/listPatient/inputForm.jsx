@@ -74,8 +74,7 @@ function InputForm({showAdd, setShowAdd, searchValue, setLoading, setSearchResul
                 gender: gender,
                 address: address,
                 phone_number: phoneNumber,
-                status: "Đang điều trị",
-                history: []
+                status: "Đang điều trị"
             }
         }).then(res => {
             if (res.data == "Success") {

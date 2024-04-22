@@ -3,26 +3,43 @@ import Tabs from 'react-bootstrap/Tabs';
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import Profile from "./profile";
-import History from "./history";
+import Profile from "./profile/profile";
+import History from "./history/history";
+import Test from "./test/test";
+
 import { getPatientProfile } from "./getPatientProfile";
-import { getOverlayDirection } from "react-bootstrap/esm/helpers";
 import { getDoctorList } from "./getDoctorList";
+import { fetchHistory } from "./history/fetchHistory.jsx";
+import { fetchTest } from "./test/fetchTest.jsx"
 
 
 function PatientTabs() {
-    const {patientID} = useParams();
+    const patientID = useParams();
+
     const [data, setData] = useState({});
     const [doctorData, setDoctorData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [showUpdateProfile, setShowUpdateProfile] = useState(false);
+
+    const [history, setHistory] = useState([]);
     const [showAddHistory, setShowAddHistory] = useState(false);
+    const [showUpdateHistory, setShowUpdateHistory] = useState(false);
+    const [showDeleteHistory, setShowDeleteHistory] = useState(false);
+
+    const [test, setTest] = useState([]);
+    const [showAddTest, setShowAddTest] = useState(false);
+    const [showUpdateTest, setShowUpdateTest] = useState(false);
+    const [showDeleteTest, setShowDeleteTest] = useState(false);
+
+    const [loading, setLoading] = useState(true);
+
+    const [showUpdateProfile, setShowUpdateProfile] = useState(false);
 
     useEffect(
         () => {
-            getPatientProfile(patientID, data, setData, setLoading);
-            getDoctorList(patientID, doctorData, setDoctorData, setLoading)
-        }, [loading, showUpdateProfile, showAddHistory]
+            getPatientProfile(patientID.patientID, data, setData, setLoading);
+            getDoctorList(patientID.patientID, doctorData, setDoctorData, setLoading);
+            fetchHistory(patientID.patientID, setHistory);
+            fetchTest(patientID.patientID, setTest);
+        }, [loading, showUpdateProfile, showAddHistory, showUpdateHistory, showDeleteHistory, showAddTest, showUpdateTest, showDeleteTest]
     )
 
     return (
@@ -69,13 +86,35 @@ function PatientTabs() {
             className=""
             >
                 <Tab eventKey="profile" title="Thông tin cá nhân">
-                    <Profile data={data} showUpdateProfile={showUpdateProfile} setShowUpdateProfile={setShowUpdateProfile}></Profile>
+                    <Profile 
+                        data={data} 
+                        showUpdateProfile={showUpdateProfile} 
+                        setShowUpdateProfile={setShowUpdateProfile}
+                    ></Profile>
                 </Tab>
                 <Tab eventKey="history" title="Lịch sử bệnh án">
-                    <History data={data} doctorData={doctorData} showAddHistory={showAddHistory} setShowAddHistory={setShowAddHistory}></History>
+                    <History
+                        doctorData={doctorData}
+                        history={history}
+                        setHistory={setHistory}
+                        showAddHistory={showAddHistory}
+                        setShowAddHistory={setShowAddHistory}
+                        showUpdateHistory={showUpdateHistory}
+                        setShowUpdateHistory={setShowUpdateHistory}
+                        showDeleteHistory={showDeleteHistory}
+                        setShowDeleteHistory={setShowDeleteHistory}
+                    ></History>
                 </Tab>
                 <Tab eventKey="test" title="Kết quả xét nghiệm">
-
+                    <Test 
+                        test={test} 
+                        showAddTest={showAddTest} 
+                        setShowAddTest={setShowAddTest}
+                        showUpdateTest={showUpdateTest}
+                        setShowUpdateTest={setShowUpdateTest}
+                        showDeleteTest={showDeleteTest}
+                        setShowDeleteTest={setShowDeleteTest}
+                    ></Test>
                 </Tab>
                 <Tab eventKey="treatment" title="Lịch trình điều trị">
                     

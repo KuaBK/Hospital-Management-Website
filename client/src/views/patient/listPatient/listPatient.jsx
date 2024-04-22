@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-
 import { FiPlus } from "react-icons/fi";
 
 import Search from "./search";
@@ -36,7 +35,7 @@ function ListPatient() {
 
     return (
         <>
-            <div className="p-5" style={{width: "80%"}}>
+            <div className="p-5" style={{width: "80%", height: "100vh"}}>
                 <h3 className="mx-4 mt-2 mb-4">Bệnh nhân</h3>
                 <div className="card border border-0">
                     <div className="d-flex flex-row justify-content-between align-items-center mb-3 border-bottom p-3">
@@ -57,9 +56,9 @@ function ListPatient() {
                         inputChange={inputChange}
                         setInputChange={setInputChange}
                     ></Search>
-                    <div className="px-3">
+                    <div className="px-3" style={{maxHeight: "390px", overflowY: "scroll"}}>
                         <table className="table align-middle">
-                            <thead>
+                            <thead style={{position: "sticky", top: "0px"}}>
                                 <tr>
                                     <th scope="col">Họ tên</th>
                                     <th scope="col">Tuổi</th>

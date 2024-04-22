@@ -31,8 +31,8 @@ module.exports.create = async (req, res) => {
         } else if (req.body.data.phone_number == "") {
             res.end("Vui lòng cung cấp số điện thoại của bệnh nhân");
         } else {
-            const patient = await new Patient(req.body.data);
-            await patient.save()
+            const patient = new Patient(req.body.data);
+            await patient.save();
             res.send("Success");
         }
     } else {
@@ -61,24 +61,29 @@ module.exports.delete = async (req, res) => {
     res.send("Success");
 }
 
-module.exports.createHistory = async (req, res) => {
+module.exports.createTest = async (req, res) => {
     const id = req.body.data.id;
     const date = req.body.data.date;
-    const doctor = req.body.data.doctor;
-    const check = await Patient.findOne({_id: id, "history.date": date, "history.doctor": doctor});
+    const data = req.body.data.data;
 
-    if(!check) {
+    if (await Patient.findOne({_id: id, "test.date": date, "test.data.name": data.name})) {
+        res.send("Kết quả xét nghiệm đã tồn tại trong hệ thống");
+    } else if (await Patient.findOne({_id: id, "test.date": date})) {
+        await Patient.updateOne(
+            {_id: id, "test.date": date},
+            {$push: {"test.$.data": data}}
+        )
+        res.send("Success");
+    } else {
         await Patient.updateOne(
             {_id: req.body.data.id},
             {$push: {
-                history: {
-                    $each: [{date: date, doctor: doctor}],
+                test: {
+                    $each: [{date: date, data: data}],
                     $sort: {date: -1}
                 }
             }}
         )
         res.send("Success");
-    } else {
-        res.send("Bệnh án đã tồn tại trong hệ thống");
     }
 }

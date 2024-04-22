@@ -57,9 +57,9 @@ function ListEmployee() {
                         inputChange={inputChange}
                         setInputChange={setInputChange}
                     ></Search>
-                    <div className="px-3">
+                    <div className="px-3" style={{maxHeight: "390px", overflowY: "scroll"}}>
                         <table className="table align-middle">
-                            <thead>
+                            <thead style={{position: "sticky", top: "0px"}}>
                                 <tr>
                                     <th scope="col">Họ tên</th>
                                     <th scope="col">Tuổi</th>

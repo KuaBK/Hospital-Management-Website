@@ -12,18 +12,20 @@ import ToastContainer from "react-bootstrap/ToastContainer";
 import moment from 'moment';
 moment().format();
 
-function InputForm({patientID, showAddHistory, setShowAddHistory, doctorData, data}) {
+function InputForm({patientID, showAddTest, setShowAddTest}) {
     const [notification, setNotification] = useState("");
     const [showWarning, setShowWarning] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
 
     const [date, setDate] = useState("");
-    const [doctor, setDoctor] = useState("")
+    const [name, setName] = useState("");
+    const [result, setResult] = useState("");
 
     const handleCloseAdd = () => {
-        setShowAddHistory(false);
+        setShowAddTest(false);
         setDate("");
-        setDoctor("");
+        setName("");
+        setResult("");
     }
 
     const handleDate = (e) => {
@@ -31,21 +33,29 @@ function InputForm({patientID, showAddHistory, setShowAddHistory, doctorData, da
         setDate(date);
     }
 
-    const handleDoctor = (e) => {
-        const doctor = e.target.value;
-        setDoctor(doctor);
+    const handleName = (e) => {
+        const name = e.target.value;
+        setName(name);
+    }
+
+    const handleResult = (e) => {
+        const result = e.target.value;
+        setResult(result);
     }
 
     const handleSubmitAdd = async () => {
-        await axios.post(`http://localhost:3000/patient/${patientID}/createHistory`, {
+        await axios.post(`http://localhost:3000/test/create`, {
             data: {
-                id: data._id,
+                patientID: patientID.patientID,
                 date: date,
-                doctor: doctorData.find(o => o.name == doctor)
+                data: {
+                    name: name,
+                    result: result,
+                }
             }
         }).then(res => {
             if (res.data == "Success") {
-                setNotification("Thêm bệnh án thành công");
+                setNotification("Thêm kết quả xét nghiệm thành công");
                 setShowSuccess(true);
                 handleCloseAdd();
             } else {
@@ -57,14 +67,14 @@ function InputForm({patientID, showAddHistory, setShowAddHistory, doctorData, da
 
     return (
         <>
-            <Modal size="lg" show={showAddHistory} onHide={handleCloseAdd} style={{top: "20%"}}>
+            <Modal size="lg" show={showAddTest} onHide={handleCloseAdd} style={{top: "20%"}}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Thêm bệnh án</Modal.Title>
+                    <Modal.Title>Thêm kết quả xét nghiệm</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Form.Group as={Row} className="mb-3">
-                            <Form.Label column sm="2">Ngày</Form.Label>
+                            <Form.Label column sm="3">Ngày</Form.Label>
                             <Col sm="3">
                                 <Form.Control 
                                     type="date"
@@ -75,15 +85,22 @@ function InputForm({patientID, showAddHistory, setShowAddHistory, doctorData, da
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3" controlId="nameForm" >
-                            <Form.Label column sm="2">Bác sĩ</Form.Label>
+                            <Form.Label column sm="3">Tên xét nghiệm</Form.Label>
                             <Col sm="5">
-                                <Form.Select value={doctor}  onChange={e => handleDoctor(e)}>
-                                    <option>Chọn bác sĩ</option>
-                                    {doctorData.map((doctor) => {
-                                        return (
-                                            <option key={doctor._id}>{doctor.name}</option>
-                                        )
-                                    })}
+                                <Form.Select value={name}  onChange={e => handleName(e)}>
+                                    <option>Chọn xét nghiệm</option>
+                                    <option>Xét nghiệm máu</option>
+                                    <option>Xét nghiệm nước tiểu</option>
+                                </Form.Select>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="mb-3" controlId="nameForm" >
+                            <Form.Label column sm="3">Kết quả</Form.Label>
+                            <Col sm="5">
+                                <Form.Select value={result}  onChange={e => handleResult(e)}>
+                                    <option>Chọn kết quả</option>
+                                    <option>Tốt</option>
+                                    <option>Không tốt</option>
                                 </Form.Select>
                             </Col>
                         </Form.Group>
