@@ -10,10 +10,12 @@ import PatientDetail from "./views/patient/patientProfile/patientDetail";
 import PatientTabs from "./views/patient/patientProfile/patientTabs";
 import ListPatient from "./views/patient/listPatient/listPatient";
 import Employee from "./views/employee/employee";
-import ListEmployee from "./views/employee/components/listEmployee";
+import ListEmployee from "./views/employee/listEmployee/listEmployee";
+import EmployeeDetail from "./views/employee/employeeProfile/employeeDetail";
 import Medicine from "./views/medicine/medicine";
 import ListMedicine from "./views/medicine/components/listMedicine";
-import Device from "./views/device";
+import Device from "./views/device/device";
+import ListDevice from "./views/device/components/listDevice";
 import User from "./views/user"
 import SignIn from "./views/login/signIn";
 
@@ -34,11 +36,14 @@ function Navigation() {
           </Route>
           <Route path="/employee" Component={Employee}>
             <Route path="" Component={ListEmployee}></Route>
+            <Route path=":employeeID" Component={EmployeeDetail}></Route>
           </Route>
           <Route path="/medicine" Component={Medicine}>
             <Route path="" Component={ListMedicine}></Route>
           </Route>
-          <Route path="/device" Component={Device}></Route>
+          <Route path="/device" Component={Device}>
+            <Route path="" Component={ListDevice}></Route>
+          </Route>
         </Routes>
       </BrowserRouter>
   )

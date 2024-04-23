@@ -5,6 +5,11 @@ module.exports.index = async (req, res) => {
     res.json(employees)
 }
 
+module.exports.detail = async (req, res) => {
+    const data = await Employee.findById(req.params.employeeID);
+    res.json(data);
+}
+
 module.exports.create = async (req, res) => {
     const phoneNumberCheck = await Employee.find({phone_number: req.body.data.phone_number});
     const check = await Employee.find(req.body.data);
@@ -32,6 +37,19 @@ module.exports.create = async (req, res) => {
         } else {
             res.end("Nhân viên đã tồn tại trong hệ thống");
         }
+    }
+}
+
+module.exports.update = async (req, res) => {
+    let check = false;
+
+    if (req.body.data) {
+        await Employee.updateOne({_id: req.body.data.id}, req.body.data)
+        check = true;
+    }
+
+    if (check) {
+        res.end("Success");
     }
 }
 

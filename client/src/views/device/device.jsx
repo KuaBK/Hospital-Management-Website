@@ -1,12 +1,11 @@
-import Nav from "../hooks/nav";
+import { Outlet } from "react-router-dom";
+import Nav from "../../hooks/nav";
 
 function Device() {
     return (
         <div className="d-flex flex-row" style={{backgroundColor: "#F1F8FF"}}>
             <Nav></Nav>
-            <div className="" style={{width: "80%"}}>
-                <p>Device</p>
-            </div>
+            <Outlet></Outlet>
         </div>
     )
 }

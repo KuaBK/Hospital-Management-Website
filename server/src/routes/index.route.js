@@ -4,6 +4,7 @@ const userRoutes = require("./user.route");
 const employeeRoutes = require("./employee.route");
 const medicineRoutes = require("./medicine.route");
 const testRoutes = require("./test.route");
+const deviceRoutes = require("./device.route");
 
 const cors = require("cors");
 const express = require("express");
@@ -24,4 +25,5 @@ module.exports = app => {
     app.use("/user", userRoutes);
     app.use("/employee", employeeRoutes);
     app.use("/medicine", medicineRoutes);
+    app.use("/device", deviceRoutes)
 }
