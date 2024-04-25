@@ -15,7 +15,7 @@ import EmployeeDetail from "./views/employee/employeeProfile/employeeDetail";
 import Medicine from "./views/medicine/medicine";
 import ListMedicine from "./views/medicine/components/listMedicine";
 import Device from "./views/device/device";
-import ListDevice from "./views/device/components/listDevice";
+import ListDevice from "./views/device/listDevice/listDevice";
 import User from "./views/user"
 import SignIn from "./views/login/signIn";
 
