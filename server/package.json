@@ -22,6 +22,7 @@
     "express": "^4.18.3",
     "firebase": "^10.9.0",
     "firebase-admin": "^12.0.0",
+    "moment": "^2.30.1",
     "mongodb": "^6.5.0",
     "mongoose": "^8.2.3",
     "react-bootstrap": "^2.10.2"

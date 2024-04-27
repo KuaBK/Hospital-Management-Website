@@ -1,3 +1,4 @@
+const homeRoutes = require("./home.route");
 const patientRoutes = require("./patient.route");
 const historyRoutes = require("./history.route");
 const userRoutes = require("./user.route");
@@ -18,7 +19,7 @@ module.exports = app => {
        credentials: true, origin: true 
       }));
     
-
+    app.use("", homeRoutes);
     app.use("/patient", patientRoutes);
     app.use("/history", historyRoutes);
     app.use("/test", testRoutes);
