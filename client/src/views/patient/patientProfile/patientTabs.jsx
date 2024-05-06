@@ -116,9 +116,6 @@ function PatientTabs() {
                         setShowDeleteTest={setShowDeleteTest}
                     ></Test>
                 </Tab>
-                <Tab eventKey="treatment" title="Lịch trình điều trị">
-                    
-                </Tab>
             </Tabs>
         </>
     )
