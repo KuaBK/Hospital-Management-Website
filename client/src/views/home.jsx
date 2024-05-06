@@ -25,7 +25,7 @@ function Home() {
     }).then(result => setMedicines(result.data));
 
     setLoading(false);
-  };
+  }
 
   useEffect(() => {
       if (!tokenUser) {

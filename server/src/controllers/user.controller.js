@@ -28,7 +28,7 @@ module.exports.signup = async (req, res) => {
             req.body.data.password = bcrypt.hashSync(req.body.data.password, saltRounds);
             req.body.data.re_password = bcrypt.hashSync(req.body.data.re_password, saltRounds);
 
-            const user = await new User(req.body.data);
+            const user = new User(req.body.data);
             await user.save()
             res.cookie("tokenUser", user.tokenUser);
             res.send("Success");
@@ -57,4 +57,32 @@ module.exports.signin = async (req, res) => {
 
 module.exports.signout = async (req, res) => {
     res.clearCookie("tokenUser").send("Success");
+}
+
+module.exports.info = async (req, res) => {
+    const info = await User.findOne({tokenUser: req.query.tokenUser});
+    res.json(info);
+}
+
+module.exports.changePassword = async (req, res) => {
+    const user = await User.findById(req.body.data.id);
+    if (bcrypt.compareSync(req.body.data.oldPassword, user.password)) {
+        if (req.body.data.newPassword === req.body.data.reNewPassword) {
+            req.body.data.newPassword = bcrypt.hashSync(req.body.data.newPassword, saltRounds);
+            req.body.data.reNewPassword = bcrypt.hashSync(req.body.data.reNewPassword, saltRounds);
+
+            await User.updateOne({_id: user.id}, {
+                $set: {
+                    password: req.body.data.newPassword,
+                    re_password: req.body.data.reNewPassword
+                }
+            })
+
+            res.end("Success");
+        } else {
+            res.end("Nhập lại mật khẩu chưa chính xác");
+        }
+    } else {
+        res.end("Mật khẩu cũ chưa chính xác");
+    }
 }
