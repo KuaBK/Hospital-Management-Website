@@ -32,18 +32,47 @@ const corsOptions = {
 
 
 module.exports = app => {
-    app.use(cors(corsOptions));
-    app.options('*', cors(corsOptions));
     app.use(cookieParser('MY SECRET'));
     app.use(express.json());
     app.use(express.urlencoded({extended: true}));
+    app.use(cors(corsOptions));
+    app.options('*', cors(corsOptions)); // Enable preflight requests for all routes
+    app.use((req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
+    app.use((req, res, next) => {
+        res.header("Access-Control-Allow-Credentials", true);
+        next();
+    });
+    app.use((req, res, next) => {
+        res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        next();
+    });
+    app.use((req, res, next) => {
+        res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        next();
+    });
+    app.use((req, res, next) => {
+        res.header("Access-Control-Expose-Headers", "Content-Type, Authorization");
+        next();
+    });
+    app.use((req, res, next) => {
+        res.header("Access-Control-Max-Age", 86400); // 24 hours
+        next();
+    });
+    app.use((req, res, next) => {
+        res.header("Access-Control-Request-Headers", "Content-Type, Authorization");
+        next();
+    });
     
-    app.use("", homeRoutes);
-    app.use("/patient", patientRoutes);
-    app.use("/history", historyRoutes);
-    app.use("/test", testRoutes);
-    app.use("/user", userRoutes);
-    app.use("/employee", employeeRoutes);
-    app.use("/medicine", medicineRoutes);
-    app.use("/device", deviceRoutes)
+    // app.use("", homeRoutes);
+    // app.use("/patient", patientRoutes);
+    // app.use("/history", historyRoutes);
+    // app.use("/test", testRoutes);
+    // app.use("/user", userRoutes);
+    // app.use("/employee", employeeRoutes);
+    // app.use("/medicine", medicineRoutes);
+    // app.use("/device", deviceRoutes)
 }
