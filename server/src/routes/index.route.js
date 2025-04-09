@@ -11,13 +11,26 @@ const cors = require("cors");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 
+const allowedOrigins = [
+  "https://hospital-management-website-psi.vercel.app",
+  "https://hospital-management-website-git-main-kuabks-projects.vercel.app", // thêm local nếu dev
+  "https://hospital-management-website-c9g06nj3w-kuabks-projects.vercel.app" // thêm domain khác nếu có
+];
+
 module.exports = app => {
+    app.use(cors({
+      origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error("Not allowed by CORS"));
+        }
+      },
+      credentials: true
+    }));
     app.use(cookieParser('MY SECRET'));
     app.use(express.json());
     app.use(express.urlencoded({extended: true}));
-    app.use(cors({
-       credentials: true, origin: true 
-      }));
     
     app.use("", homeRoutes);
     app.use("/patient", patientRoutes);
