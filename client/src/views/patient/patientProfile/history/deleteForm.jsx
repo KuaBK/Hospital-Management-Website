@@ -18,7 +18,7 @@ function DeleteForm({showDeleteHistory, setShowDeleteHistory, doctor, setDoctor,
     }
 
     const handleSubmitDelete = async () => {
-        await axios.delete("http://localhost:3000/history/delete/", {
+        await axios.delete("https://hospital-management-website-v6hl.onrender.com/history/delete/", {
             data: {
                 patientData: patientData,
                 doctor: doctor

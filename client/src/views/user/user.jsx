@@ -19,7 +19,7 @@ function User() {
     const fetchApi = async (setLoading) => {
         setLoading(true);
     
-        await axios.get("http://localhost:3000/user/info", {
+        await axios.get("https://hospital-management-website-v6hl.onrender.com/user/info", {
             params: {
                 tokenUser: tokenUser
             }

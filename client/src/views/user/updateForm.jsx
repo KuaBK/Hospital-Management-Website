@@ -38,7 +38,7 @@ function UpdateForm({info, showUpdate, setShowUpdate}) {
     }
 
     const handleSubmitUpdate = async () => {
-        await axios.patch("http://localhost:3000/user/changePassword", {
+        await axios.patch("https://hospital-management-website-v6hl.onrender.com/user/changePassword", {
             data: {
                 id: info._id,
                 oldPassword: oldPassword,

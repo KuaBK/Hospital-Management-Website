@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const fetchTest = async (patientID, setTest) => {
-    await axios.get("http://localhost:3000/test", {
+    await axios.get("https://hospital-management-website-v6hl.onrender.com/test", {
         params: {
             patientID: patientID,
         }

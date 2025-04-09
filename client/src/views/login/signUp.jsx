@@ -30,7 +30,7 @@ function SignUp() {
     )
     
     const handleSignUp = async () => {
-        await axios.post("http://localhost:3000/user/signup", {
+        await axios.post("https://hospital-management-website-v6hl.onrender.com/user/signup", {
             data: {
                 name: name,
                 email: email,
