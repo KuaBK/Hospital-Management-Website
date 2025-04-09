@@ -7,19 +7,24 @@ const medicineRoutes = require("./medicine.route");
 const testRoutes = require("./test.route");
 const deviceRoutes = require("./device.route");
 
-const cors = require("cors");
+const cors = require('cors');
 const express = require("express");
 const cookieParser = require("cookie-parser");
 
 const allowedOrigins = [
-  "https://hospital-management-website-psi.vercel.app",
-  "https://hospital-management-website-git-main-kuabks-projects.vercel.app", // thêm local nếu dev
-  "https://hospital-management-website-c9g06nj3w-kuabks-projects.vercel.app" // thêm domain khác nếu có
+  'https://hospital-management-website-psi.vercel.app',
+  'https://hospital-management-website-git-main-kuabks-projects.vercel.app' // thêm local nếu dev
 ];
 
 module.exports = app => {
     app.use(cors({
-      origin: "https://hospital-management-website-psi.vercel.app",
+      origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
       credentials: true
     }));
     app.use(cookieParser('MY SECRET'));
