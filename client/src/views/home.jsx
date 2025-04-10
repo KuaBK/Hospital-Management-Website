@@ -18,10 +18,10 @@ function Home() {
   const fetchApi = async (setLoading) => {
     setLoading(true);
 
-    await axios.get("http://localhost:3000/patients", {
+    await axios.get("https://hospital-management-website-gude.onrender.com/patients", {
     }).then(result => setPatients(result.data));
 
-    await axios.get("http://localhost:3000/medicines", {
+    await axios.get("https://hospital-management-website-gude.onrender.com/medicines", {
     }).then(result => setMedicines(result.data));
 
     setLoading(false);

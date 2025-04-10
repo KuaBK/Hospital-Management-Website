@@ -17,7 +17,7 @@ function DeleteForm({showDeleteTest, setShowDeleteTest, patientID, deleteID, set
     }
 
     const handleSubmitDelete = async () => {
-        await axios.delete("http://localhost:3000/test/delete/", {
+        await axios.delete("https://hospital-management-website-gude.onrender.com/test/delete/", {
             data: {
                 patientID: patientID.patientID,
                 deleteID: deleteID

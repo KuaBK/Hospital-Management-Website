@@ -67,7 +67,7 @@ function InputForm({showAdd, setShowAdd, searchValue, setLoading, setSearchResul
     }
 
     const handleSubmitAdd = async () => {
-        await axios.post("http://localhost:3000/patient/create", {
+        await axios.post("https://hospital-management-website-gude.onrender.com/patient/create", {
             data: {
                 name: name,
                 age: age,

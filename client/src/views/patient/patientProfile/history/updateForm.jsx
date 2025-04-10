@@ -28,7 +28,7 @@ function UpdateForm({showUpdateHistory, setShowUpdateHistory, doctor, setDoctor,
     }
 
     const handleSubmitUpdate = async () => {
-        await axios.patch("http://localhost:3000/history/update", {
+        await axios.patch("https://hospital-management-website-gude.onrender.com/history/update", {
             data: {
                 patientID: patientID.patientID,
                 doctorID: doctor._id,

@@ -38,7 +38,7 @@ function InputForm({patientID, showAddHistory, setShowAddHistory, doctorData}) {
     }
 
     const handleSubmitAdd = async () => {
-        await axios.post('http://localhost:3000/history/create', {
+        await axios.post('https://hospital-management-website-gude.onrender.com/history/create', {
             data: {
                 patientID: patientID.patientID,
                 date: date,

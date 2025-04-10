@@ -3,7 +3,7 @@ import axios from "axios"
 export const fetchApi = async (searchValue, setLoading, setSearchResult) => {
     setLoading(true);
 
-    await axios.get("http://localhost:3000/device", {
+    await axios.get("https://hospital-management-website-gude.onrender.com/device", {
         params: {
             keyword: searchValue,
         }

@@ -20,7 +20,7 @@ function Nav() {
     const [loading, setLoading] = useState(true);
 
     const handleUser = async () => {
-        await axios.get("http://localhost:3000/user", {
+        await axios.get("https://hospital-management-website-gude.onrender.com/user", {
           params: {
             tokenUser: tokenUser
           }
@@ -31,7 +31,7 @@ function Nav() {
     }
 
     const handleSignOut = async () => {
-        await axios.get("http://localhost:3000/user/signout", {
+        await axios.get("https://hospital-management-website-gude.onrender.com/user/signout", {
             headers: {
                 'Content-Type': 'application/json'
             },

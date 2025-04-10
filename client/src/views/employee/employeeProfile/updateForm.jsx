@@ -72,7 +72,7 @@ function UpdateForm({data, showUpdateProfile, setShowUpdateProfile}) {
     }
 
     const handleSubmitUpdate = async () => {
-        await axios.patch("http://localhost:3000/employee/update", {
+        await axios.patch("https://hospital-management-website-gude.onrender.com/employee/update", {
             data: {
                 id: data._id,
                 name: name,
