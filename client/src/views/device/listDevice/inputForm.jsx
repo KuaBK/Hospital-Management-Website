@@ -48,7 +48,7 @@ function InputForm({showAdd, setShowAdd, searchValue, setLoading, setSearchResul
     }
 
     const handleSubmitAdd = async () => {
-        await axios.post("https://hospital-management-website-v6hl.onrender.com/device/create", {
+        await axios.post("http://localhost:3000/device/create", {
             data: {
                 name: name,
                 status: status,

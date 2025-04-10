@@ -66,7 +66,7 @@ function UpdateForm({data, showUpdateProfile, setShowUpdateProfile}) {
     }
 
     const handleSubmitUpdate = async () => {
-        await axios.patch("https://hospital-management-website-v6hl.onrender.com/patient/update", {
+        await axios.patch("http://localhost:3000/patient/update", {
             data: {
                 id: data._id,
                 name: name,

@@ -7,37 +7,17 @@ const medicineRoutes = require("./medicine.route");
 const testRoutes = require("./test.route");
 const deviceRoutes = require("./device.route");
 
-const cors = require('cors');
+const cors = require("cors");
 const express = require("express");
 const cookieParser = require("cookie-parser");
-
-const allowedOrigins = [
-  'https://hospital-management-website-psi.vercel.app',
-  'https://hospital-management-website-git-main-kuabks-projects.vercel.app',
-  'http://localhost:5173' // thêm local nếu dev
-];
-
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Không được phép truy cập từ origin này!'));
-    }
-  },
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true, 
-};
-
 
 module.exports = app => {
     app.use(cookieParser('MY SECRET'));
     app.use(express.json());
     app.use(express.urlencoded({extended: true}));
-    app.use(cors(corsOptions));
-    // app.options('*', cors(corsOptions));
-    
+    app.use(cors({
+       credentials: true, origin: true 
+      }));
     
     app.use("", homeRoutes);
     app.use("/patient", patientRoutes);
