@@ -16,7 +16,8 @@ module.exports = app => {
     app.use(express.json());
     app.use(express.urlencoded({extended: true}));
     app.use(cors({
-       credentials: true, origin: true 
+        origin: "https://hospital-management-website-psi.vercel.app/",
+        credentials: true
       }));
     
     app.use("", homeRoutes);
