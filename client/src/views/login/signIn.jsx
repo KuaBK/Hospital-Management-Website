@@ -44,7 +44,6 @@ function SignIn() {
                 setEmail("");
                 setPassword("");
 
-                return navigate("/");
             } else {
                 setNotification(res.data);
                 setShowWarning(true);
